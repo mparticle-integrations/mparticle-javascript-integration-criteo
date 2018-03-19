@@ -1,0 +1,16 @@
+{
+  "name": "mparticle-clientsdk-template",
+  "version": "1.0.0",
+  "description": "Use this template in order to create a kit for your SDK to integrate with the mParticle system",
+  "repository": {
+    "type": "git",
+    "url": "https://git.corp.mparticle.com/mparticle-integrations/mparticle-javascript-starter-kit.git"
+  },
+  "author": "Robert Ing (ring@mparticle.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "blanket": "^1.1.7",
+    "should": "^7.1.0",
+    "mocha": "^2.3.2"
+  }
+}
