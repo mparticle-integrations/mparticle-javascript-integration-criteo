@@ -320,6 +320,9 @@ describe('Criteo Integration', function () {
                 label: 'label',
                 value: 200,
                 category: 'category'
+            },
+            CustomFlags: {
+                CRITEO_VIEW_HOMEPAGE: true
             }
         });
 
@@ -359,8 +362,9 @@ describe('Criteo Integration', function () {
         mParticle.forwarder.process({
             EventDataType: MessageType.PageView,
             EventName: 'homepage',
-            EventAttributes: {
-                siteType: 'm'
+            CustomFlags: {
+                CRITEO_SITETYPE: 'm',
+                CRITEO_VIEW_HOMEPAGE: true
             }
         });
 
@@ -377,8 +381,9 @@ describe('Criteo Integration', function () {
         mParticle.forwarder.process({
             EventDataType: MessageType.PageView,
             EventName: 'homepage',
-            EventAttributes: {
-                siteType: 't'
+            CustomFlags: {
+                CRITEO_SITETYPE: 't',
+                CRITEO_VIEW_HOMEPAGE: true
             }
         });
 
@@ -396,7 +401,6 @@ describe('Criteo Integration', function () {
     it('should set customer id and customer emails', function(done) {
         mParticle.forwarder.setUserIdentity('customerid', mParticle.IdentityType.CustomerId);
         mParticle.forwarder.setUserIdentity('email@test.com', mParticle.IdentityType.Email);
-
         mParticle.forwarder.process({
             EventDataType: MessageType.Commerce,
             EventCategory: mParticle.CommerceEventType.ProductAddToCart,

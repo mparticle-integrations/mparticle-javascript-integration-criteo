@@ -25,18 +25,16 @@
             CrashReport: 5,
             OptOut: 6,
             Commerce: 16
-        };
+        },
+        // below are custom types for logging page views and setting site types for Criteo
+        CRITEO_SITETYPE = 'CRITEO_SITETYPE',
+        CRITEO_VIEW_HOMEPAGE = 'CRITEO_VIEW_HOMEPAGE';
 
     var constructor = function () {
         var self = this,
-            reportingService,
-            // each of the following Criteo Event Types are set and then an
-            // array of them are processed in processQueuedCriteoEvent
-            setAccountEvent = { event: 'setAccount' },
-            setSiteTypeEvent = { event: 'setSiteType' },
-            setEmailEvent = { event: 'setEmail' },
-            setCustomerIdEvent = { event: 'setCustomerId' },
-            setDataEvent = { event: 'setData' };
+            reportingService;
+
+        setDefaultCriteoEvents();
 
         self.name = name;
 
@@ -45,29 +43,33 @@
                 reportingService = service;
                 settings = forwarderSettings;
                 try {
-                    if (!testMode) {
-                        var criteoScript = document.createElement('script');
-                        window.criteo_q = window.criteo_q || [];
-                        criteoScript.type = 'text/javascript';
-                        criteoScript.async = true;
-                        criteoScript.src = 'https://static.criteo.net/js/ld/ld.js';
-                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(criteoScript);
-                    }
-
+                    var criteoScript = document.createElement('script');
+                    window.criteo_q = window.criteo_q || [];
+                    criteoScript.type = 'text/javascript';
+                    criteoScript.async = true;
+                    criteoScript.src = 'https://static.criteo.net/js/ld/ld.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(criteoScript);
                 }
                 catch (e) {
                     return 'Failed to initialize: ' + e;
                 }
             } else {
-                setAccountEvent = { event: 'setAccount' };
-                setSiteTypeEvent = { event: 'setSiteType' };
-                setEmailEvent = { event: 'setEmail' };
-                setCustomerIdEvent = { event: 'setCustomerId' };
-                setDataEvent = { event: 'setData' };
+                // each event needs to be defaulted for tests
+                setDefaultCriteoEvents();
             }
 
             setAccountEvent.account = forwarderSettings.apiKey;
             return 'Criteo successfully loaded';
+        }
+
+        // each of the following Criteo Event Types are set and then an
+        // array of them are processed in processQueuedCriteoEvent
+        function setDefaultCriteoEvents() {
+            setAccountEvent = { event: 'setAccount' },
+            setSiteTypeEvent = { event: 'setSiteType' },
+            setEmailEvent = { event: 'setEmail' },
+            setCustomerIdEvent = { event: 'setCustomerId' },
+            setDataEvent = { event: 'setData' };
         }
 
         function processEvent(event) {
@@ -90,7 +92,7 @@
                     }
                 }
                 else if (event.EventDataType === MessageType.PageView) {
-                    if (event.EventName === 'homepage') {
+                    if (event.CustomFlags && event.CustomFlags[CRITEO_VIEW_HOMEPAGE]) {
                         criteoEvent = { event: 'viewHome' };
                     } else {
                         return 'Error - Criteo home page views are logged via mParticle.logPageView(\'homepage\), no other logPageViews are sent to Criteo';
@@ -119,8 +121,8 @@
         }
 
         function modifySetSiteTypeEvent(event) {
-            if (event.EventAttributes && event.EventAttributes['siteType']) {
-                setSiteTypeEvent.type = event.EventAttributes['siteType'];
+            if (event.CustomFlags && event.CustomFlags[CRITEO_SITETYPE]) {
+                setSiteTypeEvent.type = event.CustomFlags[CRITEO_SITETYPE];
             } else {
                 setSiteTypeEvent.type = 'd';
             }
@@ -160,8 +162,6 @@
             if (Object.keys(setDataEvent).length > 1) {
                 eventQueue.push(setDataEvent);
             }
-
-            console.log(criteoEvent);
 
             window.criteo_q.push.apply(window.criteo_q, JSON.parse(JSON.stringify(eventQueue)));
 
