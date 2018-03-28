@@ -359,11 +359,14 @@ describe('Criteo Integration', function () {
     });
 
     it('should set setSiteType of m or t when these are set as event attributes', function(done) {
+        mParticle.forwarder.init({
+            apiKey: 'abcde'
+        }, reportService, true, null, null, null, null, null, {CRITEO_SITETYPE: 'm'});
+
         mParticle.forwarder.process({
             EventDataType: MessageType.PageView,
             EventName: 'homepage',
             CustomFlags: {
-                CRITEO_SITETYPE: 'm',
                 CRITEO_VIEW_HOMEPAGE: true
             }
         });
@@ -378,11 +381,13 @@ describe('Criteo Integration', function () {
 
         criteo_q = [];
 
+        mParticle.forwarder.init({
+            apiKey: 'abcde'
+        }, reportService, true, null, null, null, null, null, {CRITEO_SITETYPE: 't'});
         mParticle.forwarder.process({
             EventDataType: MessageType.PageView,
             EventName: 'homepage',
             CustomFlags: {
-                CRITEO_SITETYPE: 't',
                 CRITEO_VIEW_HOMEPAGE: true
             }
         });

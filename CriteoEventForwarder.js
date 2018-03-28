@@ -32,13 +32,15 @@
 
     var constructor = function () {
         var self = this,
-            reportingService;
+            reportingService,
+            mpCustomFlags;
 
         setDefaultCriteoEvents();
 
         self.name = name;
 
-        function initForwarder(forwarderSettings, service, testMode) {
+        function initForwarder(forwarderSettings, service, testMode, trackerId, userAttributes, userIdentities, appVersion, appName, customFlags) {
+            mpCustomFlags = customFlags;
             if (!testMode) {
                 reportingService = service;
                 settings = forwarderSettings;
@@ -120,9 +122,9 @@
             }
         }
 
-        function modifySetSiteTypeEvent(event) {
-            if (event.CustomFlags && event.CustomFlags[CRITEO_SITETYPE]) {
-                setSiteTypeEvent.type = event.CustomFlags[CRITEO_SITETYPE];
+        function modifySetSiteTypeEvent() {
+            if (mpCustomFlags && mpCustomFlags[CRITEO_SITETYPE]) {
+                setSiteTypeEvent.type = mpCustomFlags[CRITEO_SITETYPE];
             } else {
                 setSiteTypeEvent.type = 'd';
             }
