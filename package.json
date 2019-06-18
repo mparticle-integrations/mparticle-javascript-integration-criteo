@@ -1,16 +1,19 @@
 {
-  "name": "mparticle-clientsdk-template",
-  "version": "1.0.0",
-  "description": "Use this template in order to create a kit for your SDK to integrate with the mParticle system",
-  "repository": {
-    "type": "git",
-    "url": "https://git.corp.mparticle.com/mparticle-integrations/mparticle-javascript-starter-kit.git"
-  },
-  "author": "Robert Ing (ring@mparticle.com)",
-  "license": "ISC",
+  "name": "@mparticle/web-criteo-kit",
+  "version": "2.0.0-rc1",
+  "description": "mParticle integration sdk for Criteo",
+  "repository": "https://github.com/mparticle-integrations/mparticle-javascript-integration-criteo",
+  "contributors": [
+    "Robert Ing (ring@mparticle.com)",
+    "mParticle Developers <developers@mparticle.com> (https://www.mparticle.com)"
+  ],
+  "license": "Apache-2.0",
   "devDependencies": {
     "blanket": "^1.1.7",
     "should": "^7.1.0",
     "mocha": "^2.3.2"
+  },
+  "dependencies": {
+    "@mparticle/web-sdk": "^2.0.0"
   }
 }
