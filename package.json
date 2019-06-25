@@ -1,16 +1,27 @@
 {
-  "name": "mparticle-clientsdk-template",
-  "version": "1.0.0",
-  "description": "Use this template in order to create a kit for your SDK to integrate with the mParticle system",
-  "repository": {
-    "type": "git",
-    "url": "https://git.corp.mparticle.com/mparticle-integrations/mparticle-javascript-starter-kit.git"
-  },
+  "name": "@mparticle/web-criteo-kit",
+  "version": "2.0.0-rc.1",
+  "description": "mParticle integration sdk for Criteo",
   "author": "Robert Ing (ring@mparticle.com)",
-  "license": "ISC",
+  "repository": "https://github.com/mparticle-integrations/mparticle-javascript-integration-criteo",
+  "browser": "dist/CriteoEventForwarder.js",
+  "files": [
+    "dist/CriteoEventForwarder.js"
+  ],
+  "license": "Apache-2.0",
   "devDependencies": {
     "blanket": "^1.1.7",
     "should": "^7.1.0",
-    "mocha": "^2.3.2"
+    "mocha": "^2.3.2",
+    "rollup": "^1.13.1",
+    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-node-resolve": "^5.0.1"
+  },
+  "dependencies": {
+    "@mparticle/web-sdk": "^2.9.4-rc.1"
+  },
+  "scripts": {
+    "build": "rollup --config rollup.config.js",
+    "watch": "rollup --config rollup.config.js -w"
   }
 }
