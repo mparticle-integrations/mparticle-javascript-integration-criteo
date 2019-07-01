@@ -1,36 +1,53 @@
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 
-export default [{
-    input: 'src/CriteoEventForwarder.js',
-    output: {
-        file: 'CriteoEventForwarder.js',
-        format: 'umd',
-        exports: 'named',
-        name: 'mp-criteo-kit',
-        strict: false
+export default [
+    {
+        input: 'src/CriteoEventForwarder.js',
+        output: {
+            file: 'CriteoEventForwarder.js',
+            format: 'iife',
+            exports: 'named',
+            name: 'mpCriteoKit',
+            strict: false
+        },
+        plugins: [
+            resolve({
+                browser: true
+            }),
+            commonjs()
+        ]
     },
-    plugins: [
-        resolve({
-            browser: true
-        }),
-        commonjs()
-    ]
-},
-{
-    input: 'src/CriteoEventForwarder.js',
-    output: {
-        file: 'dist/CriteoEventForwarder.js',
-        format: 'umd',
-        exports: 'named',
-        name: 'mp-criteo-kit',
-        strict: false
+    {
+        input: 'src/CriteoEventForwarder.js',
+        output: {
+            file: 'dist/CriteoEventForwarder.iife.js',
+            format: 'iife',
+            exports: 'named',
+            name: 'mpCriteoKit',
+            strict: false
+        },
+        plugins: [
+            resolve({
+                browser: true
+            }),
+            commonjs()
+        ]
     },
-    plugins: [
-        resolve({
-            browser: true
-        }),
-        commonjs()
-    ]
-}
-] 
+    {
+        input: 'src/CriteoEventForwarder.js',
+        output: {
+            file: 'dist/CriteoEventForwarder.common.js',
+            format: 'cjs',
+            exports: 'named',
+            name: 'mpCriteoKit',
+            strict: false
+        },
+        plugins: [
+            resolve({
+                browser: true
+            }),
+            commonjs()
+        ]
+    }
+]

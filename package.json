@@ -1,16 +1,18 @@
 {
   "name": "@mparticle/web-criteo-kit",
-  "version": "2.0.0-rc.1",
+  "version": "2.0.0-rc.2",
+  "author": "mParticle Developers <developers@mparticle.com> (https://www.mparticle.com)",
   "description": "mParticle integration sdk for Criteo",
-  "author": "Robert Ing (ring@mparticle.com)",
-  "repository": "https://github.com/mparticle-integrations/mparticle-javascript-integration-criteo",
-  "browser": "dist/CriteoEventForwarder.js",
+  "browser": "dist/CriteoEventForwarder.common.js",
   "files": [
-    "dist/CriteoEventForwarder.js"
+    "dist/CriteoEventForwarder.common.js"
   ],
-  "license": "Apache-2.0",
+  "repository": "https://github.com/mparticle-integrations/mparticle-javascript-integration-criteo",
+  "scripts": {
+    "build": "rollup --config rollup.config.js",
+    "watch": "rollup --config rollup.config.js -w"
+  },
   "devDependencies": {
-    "blanket": "^1.1.7",
     "should": "^7.1.0",
     "mocha": "^2.3.2",
     "rollup": "^1.13.1",
@@ -18,10 +20,8 @@
     "rollup-plugin-node-resolve": "^5.0.1"
   },
   "dependencies": {
+    "isobject": "^4.0.0",
     "@mparticle/web-sdk": "^2.9.4-rc.1"
   },
-  "scripts": {
-    "build": "rollup --config rollup.config.js",
-    "watch": "rollup --config rollup.config.js -w"
-  }
+  "license": "Apache-2.0"
 }
