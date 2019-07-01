@@ -21,7 +21,7 @@ export default [
     {
         input: 'src/CriteoEventForwarder.js',
         output: {
-            file: 'dist/CriteoEventForwarder.js',
+            file: 'dist/CriteoEventForwarder.iife.js',
             format: 'iife',
             exports: 'named',
             name: 'mpCriteoKit',
@@ -37,7 +37,7 @@ export default [
     {
         input: 'src/CriteoEventForwarder.js',
         output: {
-            file: 'npm/CriteoEventForwarder.js',
+            file: 'dist/CriteoEventForwarder.common.js',
             format: 'cjs',
             exports: 'named',
             name: 'mpCriteoKit',
