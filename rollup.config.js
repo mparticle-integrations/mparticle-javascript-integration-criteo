@@ -5,22 +5,6 @@ export default [
     {
         input: 'src/CriteoEventForwarder.js',
         output: {
-            file: 'CriteoEventForwarder.js',
-            format: 'iife',
-            exports: 'named',
-            name: 'mpCriteoKit',
-            strict: false
-        },
-        plugins: [
-            resolve({
-                browser: true
-            }),
-            commonjs()
-        ]
-    },
-    {
-        input: 'src/CriteoEventForwarder.js',
-        output: {
             file: 'dist/CriteoEventForwarder.iife.js',
             format: 'iife',
             exports: 'named',
