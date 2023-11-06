@@ -33,8 +33,5 @@
     "rollup-plugin-node-resolve": "^5.0.1",
     "should": "^7.1.0"
   },
-  "dependencies": {
-    "isobject": "^4.0.0"
-  },
   "license": "Apache-2.0"
 }

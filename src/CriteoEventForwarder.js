@@ -14,8 +14,6 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
-    var isobject = require('isobject');
-
     var name = 'Criteo',
         moduleId = 1010,
         MessageType = {
@@ -268,18 +266,26 @@
         return moduleId;
     }
 
+    function isObject(val) {
+        return (
+            val != null &&
+            typeof val === 'object' &&
+            Array.isArray(val) === false
+        );
+    }
+
     function register(config) {
         if (!config) {
             console.log('You must pass a config object to register the kit ' + name);
             return;
         }
 
-        if (!isobject(config)) {
+        if (!isObject(config)) {
             console.log('\'config\' must be an object. You passed in a ' + typeof config);
             return;
         }
 
-        if (isobject(config.kits)) {
+        if (isObject(config.kits)) {
             config.kits[name] = {
                 constructor: constructor
             };
