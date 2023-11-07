@@ -12,7 +12,7 @@
   "scripts": {
     "build": "rollup --config rollup.config.js",
     "watch": "rollup --config rollup.config.js -w",
-    "build:test": "ENVIRONMENT=production rollup --config rollup.test.config.js",
+    "build:test": "rollup --config rollup.test.config.js",
     "test": "npm run build && npm run build:test && DEBUG=false karma start test/karma.config.js",
     "test:debug": "npm run build && npm run build:test && DEBUG=true karma start test/karma.config.js"
   },
