@@ -1,16 +1,5 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
-/*!
- * isobject <https://github.com/jonschlinkert/isobject>
- *
- * Copyright (c) 2014-2017, Jon Schlinkert.
- * Released under the MIT License.
- */
-
-function isObject(val) {
-  return val != null && typeof val === 'object' && Array.isArray(val) === false;
-}
-
 /* eslint-disable no-undef */
 
 //
@@ -27,8 +16,6 @@ function isObject(val) {
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
-    
-
     var name = 'Criteo',
         moduleId = 1010,
         MessageType = {
@@ -281,14 +268,22 @@ function isObject(val) {
         return moduleId;
     }
 
+    function isObject(val) {
+        return (
+            val != null &&
+            typeof val === 'object' &&
+            Array.isArray(val) === false
+        );
+    }
+
     function register(config) {
         if (!config) {
-            window.console.log('You must pass a config object to register the kit ' + name);
+            console.log('You must pass a config object to register the kit ' + name);
             return;
         }
 
         if (!isObject(config)) {
-            window.console.log('\'config\' must be an object. You passed in a ' + typeof config);
+            console.log('\'config\' must be an object. You passed in a ' + typeof config);
             return;
         }
 
@@ -302,15 +297,17 @@ function isObject(val) {
                 constructor: constructor
             };
         }
-        window.console.log('Successfully registered ' + name + ' to your mParticle configuration');
+        console.log('Successfully registered ' + name + ' to your mParticle configuration');
     }
 
-    if (window && window.mParticle && window.mParticle.addForwarder) {
-        window.mParticle.addForwarder({
-            name: name,
-            constructor: constructor,
-            getId: getId
-        });
+    if (typeof window !== 'undefined') {
+        if (window && window.mParticle && window.mParticle.addForwarder) {
+            window.mParticle.addForwarder({
+                name: name,
+                constructor: constructor,
+                getId: getId
+            });
+        }
     }
 
     var CriteoEventForwarder = {
