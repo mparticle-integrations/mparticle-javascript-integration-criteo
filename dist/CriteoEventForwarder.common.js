@@ -104,7 +104,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
                     return 'Error - Criteo does not support the event type - ' + event.EventDataType;
                 }
 
-                modifySetSiteTypeEvent(event);
+                modifySetSiteTypeEvent();
                 modifySetDataEvent(event);
                 queueCriteoEvent(criteoEvent);
 
